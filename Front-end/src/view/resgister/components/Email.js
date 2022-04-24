@@ -1,11 +1,10 @@
 import { useContext } from "react";
 import { dataContext } from "../../../context/resgisterContext";
-import Field from "../../../components/input-fields/Field";
-import Input from "../../../components/input-fields/Input";
+import { Field, Input } from "../../../import/mainImport"
 
 const Email = () => {
   const data = useContext(dataContext)
-  const { inputValues, handleInputEmail } = data
+  const { inputValues, handleInput } = data
   return (
     
     <Field
@@ -15,7 +14,8 @@ const Email = () => {
       <Input
         type="email"
         valueInput={inputValues.email}
-        action={handleInputEmail}
+        action={handleInput}
+        inputName='email'
       />
     </Field>
   );

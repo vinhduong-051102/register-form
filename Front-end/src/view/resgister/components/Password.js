@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { dataContext } from "../../../context/resgisterContext";
-import Field from "../../../components/input-fields/Field";
-import Input from "../../../components/input-fields/Input";
+import { Field, Input } from "../../../import/mainImport"
+
 
 const Password = () => {
   const data = useContext(dataContext)
-  const { inputValues, isShowPassword, handleInputPassword, handleInputConfirmPassword, handleChangeShow } = data
+  const { inputValues, isShowPassword, handleInput, handleChangeShow } = data
   return (
     <Field
       nameField='Password'
@@ -14,7 +14,8 @@ const Password = () => {
       <Input
         type={isShowPassword ? "text" : "password"}
         labelContent='new password'
-        action={handleInputPassword}
+        action={handleInput}
+        inputName='password'
         show={{
           isShow: true,
           isShowPassword,
@@ -26,7 +27,8 @@ const Password = () => {
       <Input
         type={isShowPassword ? "text" : "password"}
         labelContent='comfirm password'
-        action={handleInputConfirmPassword}
+        action={handleInput}
+        inputName='confirmPassword'
         show={{
           isShow: true,
           isShowPassword,

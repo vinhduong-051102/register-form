@@ -1,21 +1,36 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { appContext } from './AppContext'
 const dataContext = createContext();
 const TableDataProvider = ({ children }) => {
-	const [title, setTitle] = useState([])
+	const appData = useContext(appContext)
+	const { setId } = appData
 	const [users, setUsers] = useState([]);
+	const [isEdit, setIsEdit] = useState(false);
   useEffect(() => {
     axios.get("http://localhost:3000/forms")
 		.then((res) => {
-      const element = res.data;
-      setTitle(Object.keys(element[0]))
 			setUsers(res.data)
     })
 		.catch((err) => console.log(err))
   }, []);
+	const handleDelete = async (id) => {
+		await axios.delete(`http://localhost:3000/forms/${id}`)
+		await axios.get("http://localhost:3000/forms")
+		.then((res) => {
+			setUsers(res.data)
+    })
+		.catch((err) => console.log(err))
+	}
+	const handleEdit = (id) => {
+		setIsEdit(true)
+		setId(id)
+	}
   const data = {
-		title,
-		users
+		users,
+		isEdit,
+		handleEdit,
+		handleDelete
 	};
   return (
 		<dataContext.Provider value={data}>

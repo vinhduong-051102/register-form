@@ -1,8 +1,9 @@
-import { createContext, useState } from 'react'
+import { createContext, useState, useContext } from 'react'
 import axios from 'axios'
-
+import { appContext } from './AppContext'
 const dataContext = createContext()
 function ResgisterDataProvider({ children }) {
+    const appData = useContext(appContext)
     const [inputValues, setInputValues] = useState({
         firstName: '',
         lastName: '',
@@ -14,45 +15,12 @@ function ResgisterDataProvider({ children }) {
         confirmPassword: '',
     })
     const [isShowPassword, setIsShowPassword] = useState(false)
-    const handleInputFirstName = (e) => {
+    const handleInput = (e) => {
         setInputValues(prev => {
-            return {...prev, firstName: e.target.value}
+            return {...prev, [e.target.getAttribute('name')]: e.target.value}
         })
     }
-    const handleInputLastName = (e) => {
-        setInputValues(prev => {
-            return {...prev, lastName: e.target.value}
-        })
-    }
-    const handleInputEmail = (e) => {
-        setInputValues(prev => {
-            return {...prev, email: e.target.value}
-        })
-    }
-    const handleInputUserName = (e) => {
-        setInputValues(prev => {
-            return {...prev, userName: e.target.value}
-        })
-    }
-    const handleSelectGender = (e) => {
-        setInputValues(prev => {
-            return {...prev, gender: e.target.value}
-        })
-    }
-    const handleSelectBirthDate = (e) => {
-        setInputValues(prev => {
-            return {...prev, birthDate: e.target.value}
-        })
-    }
-    const handleInputPassword = (e) => setInputValues(prev => {
-        return {...prev, password: e.target.value}
-    })
 
-    const handleInputConfirmPassword = (e) => {
-        setInputValues(prev => {
-            return {...prev, confirmPassword: e.target.value}
-        })
-    }
     const handleChangeShow = (e) => {
         e.preventDefault()
         setIsShowPassword(!isShowPassword)
@@ -61,20 +29,12 @@ function ResgisterDataProvider({ children }) {
         const data = inputValues
         axios.post('http://localhost:3000/forms', data)
     }
-    
     const data = {
         inputValues,
         isShowPassword,
-        handleInputFirstName,
-        handleInputLastName,
-        handleInputEmail, 
-        handleInputUserName,
-        handleSelectGender,
-        handleSelectBirthDate,
-        handleInputConfirmPassword,
-        handleInputPassword,
         handleChangeShow,
         handleSubmit,
+        handleInput
     }
     return (
         <dataContext.Provider value = { data }>

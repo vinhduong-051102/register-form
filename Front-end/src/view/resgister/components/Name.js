@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { dataContext } from "../../../context/resgisterContext";
-import Field from "../../../components/input-fields/Field";
-import Input from "../../../components/input-fields/Input";
+import { Field, Input } from "../../../import/mainImport"
+
 
 const Name = () => {
   const data = useContext(dataContext)
-  const { inputValues, handleInputFirstName, handleInputLastName } = data
+  const { inputValues,  handleInput } = data
   return (
     <Field
       nameField='Name'
@@ -13,15 +13,17 @@ const Name = () => {
     >
       <Input
         type="text"
-        action={handleInputFirstName}
+        action={handleInput}
         valueInput={inputValues.firstName}
         labelContent='First name'
+        inputName='firstName'
       />
       <Input
         type="text"
-        action={handleInputLastName}
+        action={handleInput}
         valueInput={inputValues.lastName}
         labelContent='Last name'
+        inputName='lastName'
       />
     </Field>
   );

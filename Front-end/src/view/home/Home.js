@@ -1,9 +1,9 @@
 import InputField from "../../components/input-fields/Input";
 import Field from "../../components/input-fields/Field";
-import EditForm from "../edit/EditForm";
+import Edit from "../edit/Edit";
 const Home = () => {
   return (
-    <EditForm />
+    <Edit />
   )
 };
 

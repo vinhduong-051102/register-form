@@ -1,0 +1,15 @@
+{
+  "forms": [
+    {
+      "firstName": "Vinh",
+      "lastName": "Duong",
+      "email": "ng@gmail.com",
+      "userName": "VinhD",
+      "birthDate": "2022-04-06",
+      "gender": "male",
+      "password": "123",
+      "confirmPassword": "123",
+      "id": 1
+    }
+  ]
+}

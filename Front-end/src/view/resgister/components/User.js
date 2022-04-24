@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { dataContext } from "../../../context/resgisterContext";
-import Field from "../../../components/input-fields/Field";
-import Input from "../../../components/input-fields/Input";
+import { Field, Input } from "../../../import/mainImport"
+
 
 const User = () => {
   const data = useContext(dataContext)
-  const { inputValues, handleInputUserName } = data
+  const { inputValues, handleInput } = data
   return (
     <Field
       nameField='User name'
@@ -13,7 +13,8 @@ const User = () => {
     >
       <Input
         valueInput={inputValues.userName}  
-        action={handleInputUserName}
+        action={handleInput}
+        inputName='userName'
       />
     </Field>
   );

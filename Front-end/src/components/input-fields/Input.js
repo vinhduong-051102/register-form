@@ -1,6 +1,5 @@
 
 const Input = (props) => {
-
   const {
     type = "text",
     labelContent,
@@ -10,15 +9,16 @@ const Input = (props) => {
     checked = false,
     show = {},
     options = [],
+    inputName=''
   } = props;
   const { isShow, isShowPassword, handleChangeShow, inputValue } = show;
   if (type === "select") {
     return (
       <div className="input-group">
         <div className="rs-select2 js-select-simple select--no-search">
-          <select onChange={action}>
+          <select onChange={action} name={inputName} >
             {options.map((option, index) => {
-              return <option key={index}>{option}</option>;
+              return <option key={index} selected={option === valueInput} >{option}</option>;
             })}
           </select>
           <div className="select-dropdown"></div>
@@ -45,6 +45,7 @@ const Input = (props) => {
           value={valueInput}
           placeholder={placeholder}
           checked={checked}
+          name={inputName}
         />
         {isShow && (
           <button

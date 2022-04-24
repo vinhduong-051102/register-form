@@ -1,15 +1,10 @@
 
-import { useContext } from "react";
-import { dataContext } from '../../../context/tableContext'
-
 const Title = () => {
-  const data = useContext(dataContext)
-  const { title } = data
-	const newTitle = [...title, 'action']
+	const title = ['No', 'Full name', 'User name', 'Gender', 'Birth date', 'Email', 'Password', 'Action']
   return (
 		<thead>
 			<tr>
-				{newTitle.map((title, index) => <th key={index}>{title}</th>)}
+				{title.map((title, index) => <th key={index}>{title}</th>)}
 			</tr>
 		</thead>
 	)

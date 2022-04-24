@@ -693,3 +693,19 @@ a {
   margin-top: 53px;
 }
 
+tr {
+  vertical-align: middle;
+  font-size: 18px;
+}
+
+th {
+  font-size: 22px;
+}
+
+.btn {
+  font-size: 12px;
+  padding: 0 20px;
+  margin: 0 2px
+
+}
+

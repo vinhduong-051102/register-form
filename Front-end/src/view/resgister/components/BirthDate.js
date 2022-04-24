@@ -1,11 +1,10 @@
 import { useContext } from "react";
 import { dataContext } from "../../../context/resgisterContext";
-import Field from "../../../components/input-fields/Field";
-import Input from "../../../components/input-fields/Input";
+import { Field, Input } from "../../../import/mainImport"
 
 const BirthDate = () => {
   const data = useContext(dataContext)
-  const { handleSelectBirthDate } = data
+  const { handleInput } = data
   return (
     <Field
       nameField='Birth date'
@@ -13,7 +12,8 @@ const BirthDate = () => {
     >
       <Input
         type="date"
-        action={handleSelectBirthDate}
+        action={handleInput}
+        inputName='birthDate'
       />
     </Field>
   );
