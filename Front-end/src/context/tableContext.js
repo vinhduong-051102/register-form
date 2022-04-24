@@ -4,9 +4,7 @@ import { appContext } from './AppContext'
 const dataContext = createContext();
 const TableDataProvider = ({ children }) => {
 	const appData = useContext(appContext)
-	const { setId } = appData
-	const [users, setUsers] = useState([]);
-	const [isEdit, setIsEdit] = useState(false);
+	const { users, setId, isEdit, setIsEdit, setUsers } = appData
   useEffect(() => {
     axios.get("http://localhost:3000/forms")
 		.then((res) => {

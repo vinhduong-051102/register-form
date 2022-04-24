@@ -1,5 +1,13 @@
+import { useContext } from 'react'
+import { appContext } from "../../context/AppContext";
 
 const Input = (props) => {
+  const appData = useContext(appContext)
+  const { isShowPassword, setIsShowPassword } = appData
+  const handleChangeShow = (e) => {
+    e.preventDefault()
+    setIsShowPassword(!isShowPassword)
+  }
   const {
     type = "text",
     labelContent,
@@ -11,7 +19,7 @@ const Input = (props) => {
     options = [],
     inputName=''
   } = props;
-  const { isShow, isShowPassword, handleChangeShow, inputValue } = show;
+  const { isShow, inputValue } = show;
   if (type === "select") {
     return (
       <div className="input-group">

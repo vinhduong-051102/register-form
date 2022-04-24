@@ -1,11 +1,15 @@
 import { useContext } from 'react'
 import { editContext } from "../../context/editContext";
 import { Form, Field, Input } from "../../import/mainImport"
+import { appContext } from '../../context/AppContext';
 
 
 const EditForm = () => {
+  const appData = useContext(appContext)
+  const { isShowPassword } = appData
   const editData = useContext(editContext)
-  const { user, handleInput } = editData
+  const { user, handleInput, handleCancel, handleSubmitChange } = editData
+
   return (
     <Form formName="edit">
       <Field nameField='Name' numberCol={2}>
@@ -25,9 +29,13 @@ const EditForm = () => {
         <Input type="select" options={['male', 'female', 'another']} valueInput={user.gender} action={handleInput} inputName='gender' />
       </Field>
       <Field nameField='Password' numberCol={1}>
-        <Input type="password" show={{isShow: false}} labelContent='new password' valueInput={user.password}action={handleInput} inputName='password' />
+        <Input type={isShowPassword ? 'text' : 'password'} show={{isShow: true, inputValue: user.password}} labelContent='new password' valueInput={user.password}action={handleInput} inputName='password' />
       </Field>
-      <Input type="button" labelContent='Submit change' />
+      <br/>
+      <Field numberCol={2}>
+        <button type="button" className="btn btn-success" onClick={handleSubmitChange}>Submit change</button>
+        <button type="button" className="btn btn-danger" onClick={handleCancel}>Cancel</button>
+      </Field>
     </Form>
   );
 };

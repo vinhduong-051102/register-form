@@ -1,11 +1,13 @@
 import { useContext } from "react";
 import { dataContext } from "../../../context/resgisterContext";
 import { Field, Input } from "../../../import/mainImport"
-
+import { appContext } from "../../../context/AppContext";
 
 const Password = () => {
+  const appData = useContext(appContext)
+  const { isShowPassword, inputValues } = appData
   const data = useContext(dataContext)
-  const { inputValues, isShowPassword, handleInput, handleChangeShow } = data
+  const { handleInput, handleChangeShow } = data
   return (
     <Field
       nameField='Password'
@@ -18,8 +20,6 @@ const Password = () => {
         inputName='password'
         show={{
           isShow: true,
-          isShowPassword,
-          handleChangeShow,
           inputValue: inputValues.password
         }}
       />

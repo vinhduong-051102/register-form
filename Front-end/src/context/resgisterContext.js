@@ -4,27 +4,13 @@ import { appContext } from './AppContext'
 const dataContext = createContext()
 function ResgisterDataProvider({ children }) {
     const appData = useContext(appContext)
-    const [inputValues, setInputValues] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        userName: '',
-        birthDate: '',
-        gender: 'male',
-        password: '',
-        confirmPassword: '',
-    })
-    const [isShowPassword, setIsShowPassword] = useState(false)
+    const { inputValues, isShowPassword, setInputValues, setIsShowPassword } = appData
     const handleInput = (e) => {
         setInputValues(prev => {
             return {...prev, [e.target.getAttribute('name')]: e.target.value}
         })
     }
 
-    const handleChangeShow = (e) => {
-        e.preventDefault()
-        setIsShowPassword(!isShowPassword)
-    }
     const handleSubmit = () => {
         const data = inputValues
         axios.post('http://localhost:3000/forms', data)
@@ -32,7 +18,6 @@ function ResgisterDataProvider({ children }) {
     const data = {
         inputValues,
         isShowPassword,
-        handleChangeShow,
         handleSubmit,
         handleInput
     }
