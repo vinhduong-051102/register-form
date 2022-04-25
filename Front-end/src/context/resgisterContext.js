@@ -4,7 +4,7 @@ import { appContext } from './AppContext'
 const dataContext = createContext()
 function ResgisterDataProvider({ children }) {
     const appData = useContext(appContext)
-    const { inputValues, isShowPassword, setInputValues, setIsShowPassword } = appData
+    const { inputValues, isShowPassword, setInputValues } = appData
     const handleInput = (e) => {
         setInputValues(prev => {
             return {...prev, [e.target.getAttribute('name')]: e.target.value}

@@ -4,7 +4,7 @@ import { appContext } from "./AppContext";
 const logInContext = createContext()
 const LogInProvider = ({ children }) => {
   const appData = useContext(appContext)
-  const { users, loginInfor, setLoginInfor, setIsLoginSuccess, setUsers } = appData
+  const { users, loginInfor, setLoginInfor, setIsLoginSuccess, setUsers, setIsOpenModal, setUserLogin } = appData
   const handleInput = (e) => {
     setLoginInfor(prev => {
       return {...prev, [e.target.getAttribute('name')]: e.target.value}
@@ -14,19 +14,31 @@ const LogInProvider = ({ children }) => {
     axios.get("http://localhost:3000/forms")
       .then(res => setUsers(res.data))
   }, [])
+
   const handleLogin = (e) => {
     e.preventDefault()
     if(users.length > 0) {
       const loginKeys = Object.keys(loginInfor)
       const usersKeys = Object.keys(users[0])
       const commonKeys = usersKeys.filter((key) => loginKeys.includes(key))
-      const loginStatus = commonKeys.some((key) => {
-        return loginInfor[key] !== users[key]
+      const loginStatus = users.some((user) => {
+        axios.get(`http://localhost:3000/forms/${user.id}`)
+          .then((res) => setUserLogin(res.data))
+        return commonKeys.every((key) => {
+          return loginInfor[key] === user[key]
+        }) 
       })
-      setIsLoginSuccess(loginStatus)
+      setIsLoginSuccess(() => {
+        const result = loginStatus
+        if(result === false) {
+          setIsOpenModal(true)
+        }
+        return result
+      })
     }
     else {
       setIsLoginSuccess(false)
+      setIsOpenModal(true)
     }
   }
   const data = {

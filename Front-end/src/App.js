@@ -17,7 +17,6 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/log_in' element={<Log />} />
       </Routes>
-
     </div>
   );
 }

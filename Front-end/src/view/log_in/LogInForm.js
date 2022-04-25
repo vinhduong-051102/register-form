@@ -2,13 +2,15 @@ import { useContext } from "react"
 import { Form, Field, Input } from "../../import/mainImport"
 import { appContext } from "../../context/AppContext"
 import { logInContext } from "../../context/logInContext"
+import Modal from "../modal/Modal" 
+
 const LogInForm = () => {
   const appData = useContext(appContext)
-  const { isShowPassword, loginInfor } = appData
+  const { isShowPassword, loginInfor, isOpenModal } = appData
   const loginData = useContext(logInContext)
   const  { handleInput, handleLogin } = loginData
-  return (
-    <Form formName='Log in'>
+  const loginView = (
+    <Form formName='Login'>
       <Field nameField='Email'>
         <Input type='email' inputName='email' action={handleInput} />
       </Field>
@@ -18,6 +20,7 @@ const LogInForm = () => {
       <Input type="button" labelContent="Log in" action={handleLogin} />  
     </Form>
   )
+  const modalView = <Modal />
+  return isOpenModal ? modalView : loginView
 }
-
 export default LogInForm

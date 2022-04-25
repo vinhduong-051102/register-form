@@ -1,9 +1,10 @@
-import InputField from "../../components/input-fields/Input";
-import Field from "../../components/input-fields/Field";
-import Edit from "../edit/Edit";
+import { HomeDataProvider } from "../../context/homeContext";
+import HomePage from "./HomePage"
 const Home = () => {
   return (
-    <Edit />
+    <HomeDataProvider>
+      <HomePage />
+    </HomeDataProvider>
   )
 };
 
